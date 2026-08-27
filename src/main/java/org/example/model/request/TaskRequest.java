@@ -2,8 +2,10 @@ package org.example.model.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import lombok.NonNull;
 
+@Data
 public class TaskRequest {
     @JsonProperty("title")
     @NonNull
