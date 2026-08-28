@@ -3,8 +3,8 @@ package org.example.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
-import org.example.enums.PriorityType;
-import org.example.enums.StatusType;
+import org.example.constant.PriorityType;
+import org.example.constant.StatusType;
 
 @Data
 @Builder

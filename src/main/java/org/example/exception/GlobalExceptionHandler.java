@@ -4,5 +4,5 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends Throwable {
-
+    //TODO Exception but I don't know how to do
 }

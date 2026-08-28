@@ -1,6 +1,6 @@
 package org.example.repository;
 
-import org.example.enums.StatusType;
+import org.example.constant.StatusType;
 import org.example.model.TaskEntity;
 import org.springframework.stereotype.Repository;
 
