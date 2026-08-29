@@ -6,6 +6,8 @@ import lombok.Data;
 import org.example.constant.PriorityType;
 import org.example.constant.StatusType;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 public class TaskEntity {
@@ -24,4 +26,10 @@ public class TaskEntity {
 
     @JsonProperty("priority")
     private PriorityType priority;
+
+    @JsonProperty("created_datetime")
+    private LocalDateTime createdDateTime;
+
+    @JsonProperty("updateDateTime")
+    private LocalDateTime updateDateTime;
 }
