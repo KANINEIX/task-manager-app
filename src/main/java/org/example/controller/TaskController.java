@@ -35,22 +35,33 @@ public class TaskController {
 
     @GetMapping("/get/{id}")
     public Optional<TaskEntity> getTaskListById(@PathVariable("id") Integer id) {
-        return taskService.getTaskById(id);
+        log.info("Start Get Task List by id: [{}]", id);
+        Optional<TaskEntity> taskResponse = taskService.getTaskById(id);
+        log.info("End Get Task List by id: [{}]", id);
+        return taskResponse;
     }
 
     @PostMapping("/create")
-    public ResponseEntity createTask(@RequestBody TaskRequest task) {
-        TaskEntity taskEntity = taskService.createTask(task);
+    public ResponseEntity createTask(@RequestBody TaskRequest taskRequest) {
+        log.info("Start create task by title: [{}]", taskRequest.getTitle());
+        TaskEntity taskEntity = taskService.createTask(taskRequest);
+        log.info("End create task by title: [{}]", taskRequest.getTitle());
         return ResponseEntity.ok(taskEntity);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity editTask(@PathVariable("id") Integer id, @RequestBody TaskRequest taskRequest) throws GlobalExceptionHandler {
-        return ResponseEntity.ok(taskService.editTask(id, taskRequest));
+        log.info("Start edit task by id: [{}]", id);
+        taskService.editTask(id, taskRequest);
+        log.info("End edit task by id: [{}]", id);
+        return ResponseEntity.ok(TaskEntity.class);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteTask(@PathVariable("id") Integer id) {
+        log.info("Start delete task by id: [{}]", id);
+        taskService.deleteTask(id);
+        log.info("End delete task by id: [{}]", id);
         return ResponseEntity.ok(TaskEntity.class);
     }
 }
