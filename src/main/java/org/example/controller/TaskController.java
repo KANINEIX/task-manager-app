@@ -64,6 +64,6 @@ public class TaskController {
         log.info("Start delete task by id: [{}]", id);
         taskService.deleteTask(id);
         log.info("End delete task by id: [{}]", id);
-        return ResponseEntity.ok(TaskEntity.class);
+        return ResponseEntity.noContent().build();
     }
 }

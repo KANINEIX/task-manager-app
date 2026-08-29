@@ -3,7 +3,6 @@ package org.example.service;
 import lombok.AllArgsConstructor;
 import org.example.constant.PriorityType;
 import org.example.constant.StatusType;
-import org.example.exception.GlobalExceptionHandler;
 import org.example.exception.TaskNotFoundException;
 import org.example.model.TaskEntity;
 import org.example.model.request.TaskRequest;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
@@ -54,12 +52,12 @@ public class TaskService {
                 .title(taskRequest.getTitle())
                 .priority(
                         taskRequest.getPriority() != null ?
-                                PriorityType.valueOf(taskRequest.getPriority()) :
+                                PriorityType.valueOf(taskRequest.getPriority().trim().toUpperCase()) :
                                 PriorityType.LOW
                 )
                 .status(
                         taskRequest.getStatus() != null ?
-                                StatusType.valueOf(taskRequest.getStatus()) :
+                                StatusType.valueOf(taskRequest.getStatus().trim().toUpperCase()) :
                                 StatusType.TODO
                 )
                 .description(
@@ -89,12 +87,12 @@ public class TaskService {
                 )
                 .priority(
                         taskRequest.getPriority() != null ?
-                                PriorityType.valueOf(taskRequest.getPriority()) :
+                                PriorityType.valueOf(taskRequest.getPriority().trim().toUpperCase()) :
                                 taskEntity.getPriority()
                 )
                 .status(
                         taskRequest.getStatus() != null ?
-                                StatusType.valueOf(taskRequest.getStatus()) :
+                                StatusType.valueOf(taskRequest.getStatus().trim().toUpperCase()) :
                                 taskEntity.getStatus()
                 )
                 .description(
@@ -102,6 +100,7 @@ public class TaskService {
                                 taskRequest.getDescription() :
                                 taskEntity.getDescription()
                 )
+                .createdDateTime(taskEntity.getCreatedDateTime())
                 .updateDateTime(LocalDateTime.now())
                 .build();
         log.info("Start edit task by id: [{}]", id);

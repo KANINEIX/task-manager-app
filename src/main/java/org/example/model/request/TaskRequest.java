@@ -2,13 +2,16 @@ package org.example.model.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TaskRequest {
     @JsonProperty("title")
-    @NonNull
     private String title;
 
     @JsonProperty("description")
