@@ -53,7 +53,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TaskEntity> editTask(@PathVariable("id") Integer id, @RequestBody TaskRequest taskRequest) throws TaskNotFoundException {
+    public ResponseEntity<TaskEntity> editTask(@PathVariable("id") Integer id, @Valid @RequestBody TaskRequest taskRequest) throws TaskNotFoundException {
         log.info("Start edit task by id: [{}]", id);
         TaskEntity taskEntity = taskService.editTask(id, taskRequest);
         log.info("End edit task by id: [{}]", id);
