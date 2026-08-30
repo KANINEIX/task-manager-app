@@ -30,6 +30,6 @@ public class TaskEntity {
     @JsonProperty("created_datetime")
     private LocalDateTime createdDateTime;
 
-    @JsonProperty("updateDateTime")
-    private LocalDateTime updateDateTime;
+    @JsonProperty("updated_dateTime")
+    private LocalDateTime updatedDateTime;
 }

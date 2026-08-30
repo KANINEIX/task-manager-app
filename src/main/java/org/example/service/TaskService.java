@@ -66,7 +66,7 @@ public class TaskService {
                                 ""
                 )
                 .createdDateTime(LocalDateTime.now())
-                .updateDateTime(LocalDateTime.now())
+                .updatedDateTime(LocalDateTime.now())
                 .build();
         TaskEntity taskResponse = taskRepository.save(taskEntity);
         log.info("End create task by title: [{}] and id: [{}]", taskResponse.getTitle(), taskResponse.getId());
@@ -101,7 +101,7 @@ public class TaskService {
                                 taskEntity.getDescription()
                 )
                 .createdDateTime(taskEntity.getCreatedDateTime())
-                .updateDateTime(LocalDateTime.now())
+                .updatedDateTime(LocalDateTime.now())
                 .build();
         log.info("Start edit task by id: [{}]", id);
         return taskRepository.save(newEdited);

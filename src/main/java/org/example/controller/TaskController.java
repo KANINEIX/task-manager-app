@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.exception.TaskNotFoundException;
 import org.example.model.TaskEntity;
@@ -7,11 +8,11 @@ import org.example.model.request.TaskRequest;
 import org.example.service.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
@@ -44,15 +45,15 @@ public class TaskController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity createTask(@RequestBody TaskRequest taskRequest) {
+    public ResponseEntity<TaskEntity> createTask(@Valid @RequestBody TaskRequest taskRequest) {
         log.info("Start create task by title: [{}]", taskRequest.getTitle());
         TaskEntity taskEntity = taskService.createTask(taskRequest);
         log.info("End create task by title: [{}]", taskRequest.getTitle());
-        return ResponseEntity.ok(taskEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(taskEntity);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity editTask(@PathVariable("id") Integer id, @RequestBody TaskRequest taskRequest) throws TaskNotFoundException {
+    public ResponseEntity<TaskEntity> editTask(@PathVariable("id") Integer id, @RequestBody TaskRequest taskRequest) throws TaskNotFoundException {
         log.info("Start edit task by id: [{}]", id);
         TaskEntity taskEntity = taskService.editTask(id, taskRequest);
         log.info("End edit task by id: [{}]", id);
@@ -60,7 +61,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteTask(@PathVariable("id") Integer id) throws TaskNotFoundException {
+    public ResponseEntity<Void> deleteTask(@PathVariable("id") Integer id) throws TaskNotFoundException {
         log.info("Start delete task by id: [{}]", id);
         taskService.deleteTask(id);
         log.info("End delete task by id: [{}]", id);
